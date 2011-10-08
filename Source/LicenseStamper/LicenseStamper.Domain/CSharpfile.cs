@@ -36,9 +36,7 @@ namespace LicenseStamper.Domain
                 throw new ArgumentNullException("header");
             }
 
-            string originalFilecontent = GetFileContent();
-            string filecontentWithHeaderAdded = MergeHeaderWithContent(header, originalFilecontent);
-            OverwriteFileContent(filecontentWithHeaderAdded);
+            OverwriteFileContent(MergeHeaderWithContent(header, GetFileContent()));
         }
 
         string GetFileContent()
