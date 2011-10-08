@@ -52,7 +52,7 @@ namespace LicenseStamper.Domain
         {
             RaiseFileLicensingStartedEvent(licenseFilename);
 
-            CSharpfile file = new CSharpfile(licenseFilename);
+            IFile file = new CSharpfile(licenseFilename);
             license.License(file);
 
             RaiseFileLicensedEvent(licenseFilename);
