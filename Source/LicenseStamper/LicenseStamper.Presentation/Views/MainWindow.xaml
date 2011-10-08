@@ -1,0 +1,36 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="LicenseStamper.Presentation.Views.MainWindow"
+        Title="MainWindow" Height="768" Width="1024">
+    <Grid Margin="15">
+    	<Grid.RowDefinitions>
+    		<RowDefinition Height="Auto"/>
+    		<RowDefinition Height="Auto"/>
+    		<RowDefinition Height="Auto"/>
+    		<RowDefinition/>
+    		<RowDefinition Height="Auto"/>
+    	</Grid.RowDefinitions>
+    	<Grid.ColumnDefinitions>
+    		<ColumnDefinition Width="Auto"/>
+    		<ColumnDefinition/>
+    	</Grid.ColumnDefinitions>
+        
+    	<Button Content="License all C# files" VerticalAlignment="Center" Margin="15" Padding="30,5"  Grid.Column="1" HorizontalAlignment="Right" Grid.Row="4" Command="{Binding LicenseFolderCommand}" TabIndex="6" />
+        
+    	<ListBox Margin="15" Grid.Row="3" Grid.Column="1" ItemsSource="{Binding Filecontainer.LicensingProgress}" TabIndex="5"/>
+        
+    	<TextBlock TextWrapping="Wrap" d:LayoutOverrides="Width, Height" FontSize="18.667" Grid.Row="3" Margin="0,15,0,0" VerticalAlignment="Top" Text="Progress"/>
+    	<DockPanel Grid.Column="1" Grid.Row="2">
+    		<Button x:Name="ChangeProjectfolderButton" Content="Change" DockPanel.Dock="Right" VerticalAlignment="Center" Margin="0,0,15,0" Padding="30,5"
+                    Click="ChangeProjectfolderButtonClickEventHandler" TabIndex="4" />
+    		<TextBox TextWrapping="Wrap" Margin="15" FontSize="18.667" d:LayoutOverrides="Height" VerticalAlignment="Center" Text="{Binding Filecontainer.Projectfolder}" TabIndex="3" IsReadOnly="True"/>
+    	</DockPanel>
+    	<TextBlock TextWrapping="Wrap" FontSize="18.667" d:LayoutOverrides="Width, Height" Grid.Row="2" Margin="0" Text="Projectfolder" VerticalAlignment="Center"/>
+    	<TextBox TextWrapping="Wrap" Margin="15" Grid.Column="1" FontSize="18.667" d:LayoutOverrides="Width, Height" Grid.Row="1" VerticalAlignment="Center" Text="{Binding Filecontainer.CopyrightYear}" TabIndex="2"/>
+    	<TextBlock TextWrapping="Wrap" FontSize="18.667" d:LayoutOverrides="Width, Height" Grid.Row="1" Margin="0" Text="Copyright Year" VerticalAlignment="Center"/>
+    	<TextBox TextWrapping="Wrap" Margin="15" Grid.Column="1" FontSize="18.667" d:LayoutOverrides="Width, Height" VerticalAlignment="Center" Text="{Binding Filecontainer.Projectname}" TabIndex="1"/>
+    	<TextBlock TextWrapping="Wrap" FontSize="18.667" d:LayoutOverrides="Width, Height" Margin="0" Text="Projectname" VerticalAlignment="Center"/>
+        
+    </Grid>
+</Window>
