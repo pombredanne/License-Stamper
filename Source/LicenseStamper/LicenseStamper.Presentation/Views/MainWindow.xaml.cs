@@ -29,7 +29,7 @@ namespace LicenseStamper.Presentation.Views
             InitializeComponent();
         }
 
-        private void ChangeProjectfolderButtonClickEventHandler(object sender, RoutedEventArgs e)
+        void ChangeProjectfolderButtonClickEventHandler(object sender, RoutedEventArgs e)
         {
             MainWindowViewModel vm = (MainWindowViewModel)DataContext;
 

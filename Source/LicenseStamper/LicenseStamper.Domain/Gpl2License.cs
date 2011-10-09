@@ -43,6 +43,11 @@ namespace LicenseStamper.Domain
 
         public void License(IFile file)
         {
+            if (FileIsLicensedAlready(file))
+            {
+                return;
+            }
+
             file.AddHeader(GenerateLicenseHeader());
         }
 
@@ -77,6 +82,16 @@ namespace LicenseStamper.Domain
         string GenerateLicenseFile()
         {
             return File.ReadAllText("GPL2License.txt");
+        }
+
+        bool FileIsLicensedAlready(IFile file)
+        {
+            string header = file.RetrieveHeader();
+            if (header == null)
+            {
+                return false;
+            }
+            return header.Contains("GNU General Public License");
         }
     }
 }

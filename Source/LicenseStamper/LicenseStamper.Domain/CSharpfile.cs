@@ -18,6 +18,9 @@
 
 using System.IO;
 using System;
+using System.Collections.Generic;
+using System.Linq;
+
 namespace LicenseStamper.Domain
 {
     public sealed class CSharpfile : IFile
@@ -39,9 +42,36 @@ namespace LicenseStamper.Domain
             OverwriteFileContent(MergeHeaderWithContent(header, GetFileContent()));
         }
 
+        public string RetrieveHeader()
+        {
+            string[] fileContents = GetFileContentLines();
+
+            if(!FileContainsHeader(fileContents))
+            {
+                return null;
+            }
+
+            List<string> headerLines = new List<string>();
+            foreach (string line in fileContents)
+            {
+                headerLines.Add(line);
+
+                if (LineIsEndOfComment(line))
+                {
+                    break;
+                }
+            }
+            return string.Join(Environment.NewLine, headerLines);
+        }
+
         string GetFileContent()
         {
             return File.ReadAllText(_filepath);
+        }
+
+        string[] GetFileContentLines()
+        {
+            return File.ReadAllLines(_filepath);
         }
 
         void OverwriteFileContent(string newContent)
@@ -52,6 +82,21 @@ namespace LicenseStamper.Domain
         string MergeHeaderWithContent(string header, string content)
         {
             return header + content;
+        }
+
+        bool FileContainsHeader(string[] fileContent)
+        {
+            return LineIsStartOfComment(fileContent[0]);
+        }
+
+        bool LineIsStartOfComment(string line)
+        {
+            return line.Contains("/*");
+        }
+
+        bool LineIsEndOfComment(string line)
+        {
+            return line.Contains("*/");
         }
     }
 }
